@@ -4,9 +4,10 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AlertNotify from '../common/ui/Alert';
 
 function SimpleCrud() {
+  // formulario
   const [form, setForm] = useState({ 
     firstName: '', 
     lastName: '', 
@@ -14,13 +15,30 @@ function SimpleCrud() {
     email: '', 
     description: '', 
   });
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    email: '',
+    description: '',
+  });
   const [touched, setTouched] = useState({ 
     firstName: false, 
     lastName: false, 
     birthday: false, 
     email: false, 
     description: false, 
-   });
+  });
+  const [alert, setAlert] = useState({
+    type: '',
+    message: '',
+    icon: '',
+    show: false,
+  });
+
+  // Validación del formulario
+  const isFormValid = Object.values(form).every(value => value.trim() !== '');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,15 +50,35 @@ function SimpleCrud() {
     setTouched({ ...touched, [name]: true });
   };
 
+  const handleAlertClose = () => {
+    setAlert({ ...alert, show: false });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (form.firstName.trim() === '' || form.lastName.trim() === '') {
-    //   setTouched({ firstName: true, lastName: true });
-    //   return;
-    // }
-    console.log('Form submitted:', form);
-    setForm({ firstName: '', lastName: '', birthday: '', email: '', description: '' });
-    setTouched({ firstName: false, lastName: false, birthday: false, email: false, description: false });
+
+    if (isFormValid) {
+      setUsers([
+        ...users,
+        {
+          firstName: form.firstName,
+          lastName: form.lastName,
+          birthday: form.birthday,
+          email: form.email,
+          description: form.description,
+        }
+      ]);
+      setAlert({ type: 'success', title: 'Success', message: 'User added successfully!', icon: 'fa-solid fa-circle-check', show: true, });
+      setForm({ firstName: '', lastName: '', birthday: '', email: '', description: '' });
+      setTouched({ firstName: false, lastName: false, birthday: false, email: false, description: false });
+    } else {
+      setAlert({ type: 'danger', title: 'Error', message: 'Please fill in all fields.', icon: 'fa-solid fa-circle-xmark', show: true, });
+      setTouched({ firstName: true, lastName: true, birthday: true, email: true, description: true });
+    }
+
+    setTimeout(() => {
+      setAlert({ show: false, title: '', message: '' });
+    }, 4000);
   };
 
   return (
@@ -141,8 +179,24 @@ function SimpleCrud() {
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
-            <Button type="submit">Submit form</Button>
+            <Row>
+              <Col className='text-center' xs={12}>
+                <Button type="submit" disabled={!isFormValid}>Submit user</Button>
+              </Col>
+            </Row>
           </Form>
+          <Row className='mt-3'>
+            <Col>
+              <AlertNotify 
+                type={alert.type} 
+                title={alert.title} 
+                message={alert.message} 
+                icon={alert.icon} 
+                show={alert.show} 
+                onClose={handleAlertClose} 
+              />
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </>
