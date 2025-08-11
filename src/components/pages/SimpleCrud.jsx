@@ -1,10 +1,12 @@
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
+import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import AlertNotify from '../common/ui/Alert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function SimpleCrud() {
   // formulario
@@ -92,9 +94,11 @@ function SimpleCrud() {
           </Card.Text>
         </Card.Body>
       </Card>
+      {/* User Form */}
       <Card className='mt-3'>
         <Card.Body>
           <Card.Title>User Form</Card.Title>
+          {/* Form */}
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               {/* First Name */}
@@ -185,6 +189,8 @@ function SimpleCrud() {
               </Col>
             </Row>
           </Form>
+
+          {/* Alert */}
           <Row className='mt-3'>
             <Col>
               <AlertNotify 
@@ -197,6 +203,48 @@ function SimpleCrud() {
               />
             </Col>
           </Row>
+        </Card.Body>
+      </Card>
+
+      {/* Table */}
+      <Card className='mt-3 mb-5'>
+        <Card.Body>
+          <Table responsive striped hover>
+            <thead className='table-light'>
+              <tr>
+                <th>Fristname</th>
+                <th>Lastname</th>
+                <th>Birthday</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.birthday}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <Row className='text-center'>
+                      <Col xs={12} sm={4}>
+                        <Button type="button" variant='link'><FontAwesomeIcon icon="fa-solid fa-eye" className='text-primary-emphasis'/></Button>
+                      </Col>
+                      <Col xs={12} sm={4}>
+                        <Button type="button" variant='link'><FontAwesomeIcon icon="fa-solid fa-pen-to-square" className='text-warning-emphasis'/></Button>
+                      </Col>
+                      <Col xs={12} sm={4}>
+                        <Button type="button" variant='link'><FontAwesomeIcon icon="fa-solid fa-trash" className='text-danger-emphasis'/></Button>
+                      </Col>
+                    </Row>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+            { users.length === 0 && 
+            <p className="text-center">There is no data to display in the table.</p> }
         </Card.Body>
       </Card>
     </>
