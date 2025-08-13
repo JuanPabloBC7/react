@@ -19,23 +19,23 @@ function SimpleCrud() {
 
   // formulario
   const [form, setForm] = useState({ 
-    firstName: '', 
-    lastName: '', 
+    firstname: '', 
+    lastname: '', 
     birthday: '', 
     email: '', 
     description: '', 
   });
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     birthday: '',
     email: '',
     description: '',
   });
   const [touched, setTouched] = useState({ 
-    firstName: false, 
-    lastName: false, 
+    firstname: false, 
+    lastname: false, 
     birthday: false, 
     email: false, 
     description: false, 
@@ -71,19 +71,19 @@ function SimpleCrud() {
       setUsers([
         ...users,
         {
-          firstName: form.firstName,
-          lastName: form.lastName,
+          firstname: form.firstname,
+          lastname: form.lastname,
           birthday: form.birthday,
           email: form.email,
           description: form.description,
         }
       ]);
       setAlert({ type: 'success', title: 'Success', message: 'User added successfully!', icon: 'fa-solid fa-circle-check', show: true, });
-      setForm({ firstName: '', lastName: '', birthday: '', email: '', description: '' });
-      setTouched({ firstName: false, lastName: false, birthday: false, email: false, description: false });
+      setForm({ firstname: '', lastname: '', birthday: '', email: '', description: '' });
+      setTouched({ firstname: false, lastname: false, birthday: false, email: false, description: false });
     } else {
       setAlert({ type: 'danger', title: 'Error', message: 'Please fill in all fields.', icon: 'fa-solid fa-circle-xmark', show: true, });
-      setTouched({ firstName: true, lastName: true, birthday: true, email: true, description: true });
+      setTouched({ firstname: true, lastname: true, birthday: true, email: true, description: true });
     }
 
     setTimeout(() => {
@@ -93,8 +93,8 @@ function SimpleCrud() {
 
   const viewUser = (userSelected, idxSelected, modal) => {
     setUser({
-      firstName: userSelected.firstName,
-      lastName: userSelected.lastName,
+      firstname: userSelected.firstname,
+      lastname: userSelected.lastname,
       birthday: userSelected.birthday,
       email: userSelected.email,
       description: userSelected.description,
@@ -110,8 +110,8 @@ function SimpleCrud() {
   const editUser = (userSelected) => {
     setIsEditing(true);
     setForm({
-      firstName: userSelected.firstName,
-      lastName: userSelected.lastName,
+      firstname: userSelected.firstname,
+      lastname: userSelected.lastname,
       birthday: userSelected.birthday,
       email: userSelected.email,
       description: userSelected.description
@@ -129,7 +129,7 @@ function SimpleCrud() {
         setAlert({ type: 'success', title: 'Success', message: 'User updated successfully!', icon: 'fa-solid fa-circle-check', show: true, });
       }
 
-      setForm({ firstName: '', lastName: '', birthday: '', email: '', description: '' });
+      setForm({ firstname: '', lastname: '', birthday: '', email: '', description: '' });
       setIsEditing(false);
     } else {
       setAlert({ type: 'danger', title: 'Error', message: 'Something is wrong, please try again later.', icon: 'fa-solid fa-circle-xmark', show: true, });
@@ -155,7 +155,7 @@ function SimpleCrud() {
   }
   
   const clearForm = () => {
-    setForm({ firstName: '', lastName: '', birthday: '', email: '', description: '' });
+    setForm({ firstname: '', lastname: '', birthday: '', email: '', description: '' });
     setIsEditing(false);
   }
 
@@ -182,12 +182,12 @@ function SimpleCrud() {
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="firstName"
+                  name="firstname"
                   placeholder="First name"
-                  value={form.firstName}
+                  value={form.firstname}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  isInvalid={touched.firstName && form.firstName.trim() === ''}
+                  isInvalid={touched.firstname && form.firstname.trim() === ''}
                 />
                 <Form.Control.Feedback type="invalid">
                   This field is required.
@@ -198,12 +198,12 @@ function SimpleCrud() {
                 <Form.Label>Last name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="lastName"
+                  name="lastname"
                   placeholder="Last name"
-                  value={form.lastName}
+                  value={form.lastname}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  isInvalid={touched.lastName && form.lastName.trim() === ''}
+                  isInvalid={touched.lastname && form.lastname.trim() === ''}
                 />
                 <Form.Control.Feedback type="invalid">
                   This field is required.
@@ -296,7 +296,7 @@ function SimpleCrud() {
             <thead className='table-light'>
               <tr>
                 <th>Fristname</th>
-                <th>Lastname</th>
+                <th>lastname</th>
                 <th>Birthday</th>
                 <th>Email</th>
                 <th>Actions</th>
@@ -305,8 +305,8 @@ function SimpleCrud() {
             <tbody>
               {users.map((user, idx) => (
                 <tr key={idx}>
-                  <td>{user.firstName}</td>
-                  <td>{user.lastName}</td>
+                  <td>{user.firstname}</td>
+                  <td>{user.lastname}</td>
                   <td>{user.birthday}</td>
                   <td>{user.email}</td>
                   <td>
@@ -340,11 +340,11 @@ function SimpleCrud() {
           <Row className="mb-3">
             <Form.Group as={Col} xs={12} sm={6} className='mt-0' controlId="firstname">
               <Form.Label>First name</Form.Label>
-              <Form.Control type="text" name="firstName" placeholder="First name" value={user.firstName} readOnly/>
+              <Form.Control type="text" name="firstname" placeholder="First name" value={user.firstname} readOnly/>
             </Form.Group>
             <Form.Group as={Col} xs={12} sm={6} className='mt-0' controlId="lastname">
               <Form.Label>Last name</Form.Label>
-              <Form.Control type="text" name="lastName" placeholder="Last name" value={user.lastName} readOnly/>
+              <Form.Control type="text" name="lastname" placeholder="Last name" value={user.lastname} readOnly/>
             </Form.Group>
             <Form.Group as={Col} xs={12} sm={6} className='mt-3' controlId="birthday">
               <Form.Label>Birthday</Form.Label>
@@ -372,7 +372,7 @@ function SimpleCrud() {
         </Modal.Header>
         <Modal.Body>
           <Row className="mb-3">
-            <p as={Col} xs={12} sm={12} className='mb-2'>Are you sure you want to delete the user <strong>{ user.firstName } { user.lastName }</strong>?</p>
+            <p as={Col} xs={12} sm={12} className='mb-2'>Are you sure you want to delete the user <strong>{ user.firstname } { user.lastname }</strong>?</p>
           </Row>
         </Modal.Body>
         <Modal.Footer>
