@@ -7,6 +7,9 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import AlertNotify from '../common/ui/Alert';
 import Modal from 'react-bootstrap/Modal';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function SimpleCrud() {
@@ -312,13 +315,19 @@ function SimpleCrud() {
                   <td>
                     <Row className='text-center'>
                       <Col xs={12} sm={4}>
-                        <Button type="button" variant='link' onClick={() => viewUser(user, idx, 'setShowViewUserModal')}><FontAwesomeIcon icon="fa-solid fa-eye" className='text-primary-emphasis'/></Button>
+                        <OverlayTrigger overlay={<Tooltip>View user</Tooltip>}>
+                          <Button type="button" variant='link' onClick={() => viewUser(user, idx, 'setShowViewUserModal')}><FontAwesomeIcon icon="fa-solid fa-eye" className='text-primary-emphasis'/></Button>
+                        </OverlayTrigger>
                       </Col>
                       <Col xs={12} sm={4}>
-                        <Button type="button" variant='link' onClick={() => editUser(user)}><FontAwesomeIcon icon="fa-solid fa-pen-to-square" className='text-warning-emphasis'/></Button>
+                        <OverlayTrigger overlay={<Tooltip>Edit user</Tooltip>}>
+                          <Button type="button" variant='link' onClick={() => editUser(user)}><FontAwesomeIcon icon="fa-solid fa-pen-to-square" className='text-warning-emphasis'/></Button>
+                        </OverlayTrigger>
                       </Col>
                       <Col xs={12} sm={4}>
-                        <Button type="button" variant='link' onClick={() => viewUser(user, idx, 'setShowDeleteUserModal')}><FontAwesomeIcon icon="fa-solid fa-trash" className='text-danger-emphasis'/></Button>
+                        <OverlayTrigger overlay={<Tooltip>Delete user</Tooltip>}>
+                          <Button type="button" variant='link' onClick={() => viewUser(user, idx, 'setShowDeleteUserModal')}><FontAwesomeIcon icon="fa-solid fa-trash" className='text-danger-emphasis'/></Button>
+                        </OverlayTrigger>
                       </Col>
                     </Row>
                   </td>
