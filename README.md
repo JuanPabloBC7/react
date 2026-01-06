@@ -1,4 +1,18 @@
-# React + Vite
+# React
+
+This project was generated using [React](https://react.dev) version 19.1.1, [NodeJs](https://nodejs.org/en) version 20.19.4 and [npm](https://www.npmjs.com) version 10.8.2.
+
+## Development server
+
+To start a local development server, run:
+
+```bash
+npm run dev
+```
+
+Once the server is running, open your browser and navigate to `http://localhost:5173/`. The application will automatically reload whenever you modify any of the source files.
+
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
